@@ -1,44 +1,74 @@
 {% extends 'base.html' %}
 
 {% block title %}
-home
+    home
 {% endblock title %}
 
 {% block content %}
-    <input id="search_here" class="form-control mb-3" placeholder="พิมพ์ชื่อที่ต้องการค้นหาที่นี่..." />
+    <br><br>
+    <center><h2>ต้องการค้นหาเบอร์ใครเหรอจ๊ะ</h2></center>
+    <br>
+    <input id="search_here" class="form-control mb-3" placeholder="พิมพ์ชื่อที่ต้องการค้นหาที่นี่..."/>
+    <br><br>
     <div id="box">
         {% for item in object_list %}
-            <b>{{ item.army_name }} {{ item.army_rank }} {{ item.army_phonee }} {{ item.army_province }} {{ item.army_nickname }}<b><br>
+            {#            <b>{{ item.army_name }} {{ item.army_rank }} {{ item.army_phone }} {{ item.army_province }}#}
+            {#            {{ item.army_nickname }}<b><br>#}
+
+            <div class="card">
+                <h4 class="card-header">{{ item.army_name }}</h4>
+                <div class="card-body">
+                    <h5 class="card-title">ตำแหน่ง : {{ item.army_rank }}</h5>
+                    <p class="card-text">จังหวัด : {{ item.army_province }}</p>
+                    <a href="tel:{{ item.army_phone }}" class="btn btn-success">โทร. {{ item.army_phone }}</a>
+                </div>
+            </div>
+
         {% endfor %}
     </div>
 {% endblock content %}
 
 {% block scripts %}
-<script>
-    const data = '{{qs_json}}'
-    console.log(data)
+    <script>
+        const data = '{{qs_json}}'
+        console.log(data)
 
-    const rdata = JSON.parse(data.replace(/&quot;/g, '"'))
-    console.log(rdata)
+        const rdata = JSON.parse(data.replace(/&quot;/g, '"'))
+        console.log(rdata)
 
-    const input = document.getElementById('search_here')
-    console.log(input)
+        const input = document.getElementById('search_here')
+        console.log(input)
 
-    let filteredArr = []
+        let filteredArr = []
 
-    input.addEventListener('keyup', (e)=>{
-        box.innerHTML = ""
-        filteredArr = rdata.filter(info=> info['army_name'].includes(e.target.value))
-        console.log(filteredArr)
-        {#alert(filteredArr)#}
-        if (filteredArr.length > 0){
-            filteredArr.map(info=>{
-                box.innerHTML += `<b>${info['army_name']}</b><br>`
-            })
-        } else {
-            box.innerHTML = "<b>No results found...</b>"
-        }
-    })
+        input.addEventListener('keyup', (e) => {
 
-</script>
+            box.innerHTML = ""
+
+            filteredArr = rdata.filter(info => info['army_hint'].includes(e.target.value))
+            console.log(filteredArr)
+            {#alert(filteredArr)#}
+            if (filteredArr.length > 0) {
+                filteredArr.map(info => {
+                    box.innerHTML += `
+
+</b><br>
+{#id	army_name	army_rank	army_phone	army_province	army_hint#}
+<div class="card">
+                <h4 class="card-header" >${info['army_name']}</h4>
+                <div class="card-body">
+                    <h5 class="card-title">ตำแหน่ง : ${info['army_rank']}</h5>
+                    <p class="card-text">จังหวัด : ${info['army_province']}</p>
+                    <a href="tel:${info['army_phone']}" class="btn btn-success">โทร. ${info['army_phone']}</a>
+                </div>
+            </div>
+
+`
+                })
+            } else {
+                box.innerHTML = "<b>No results found...</b>"
+            }
+        })
+
+    </script>
 {% endblock scripts %}
