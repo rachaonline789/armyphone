@@ -29,7 +29,7 @@ SECRET_KEY = '84k4z(4f4q%p$l^ic09)0lztb)0^#&njb&2n9zww$a8m_77b%&'
 # เอาไปบน Digital Ocean ต้องตั้งเป็น False
 DEBUG = False
 
-ALLOWED_HOSTS = [188.166.243.130]
+ALLOWED_HOSTS = ['188.166.243.130']
 
 
 # Application definition
