@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+home
+{% endblock title %}
+
+{% block content %}
+    <input id="search_here" class="form-control mb-3" placeholder="พิมพ์ชื่อที่ต้องการค้นหาที่นี่..." />
+    <div id="box">
+        {% for item in object_list %}
+            <b>{{ item.army_name }} {{ item.army_rank }} {{ item.army_phonee }} {{ item.army_province }} {{ item.army_nickname }}<b><br>
+        {% endfor %}
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    const data = '{{qs_json}}'
+    console.log(data)
+
+    const rdata = JSON.parse(data.replace(/&quot;/g, '"'))
+    console.log(rdata)
+
+    const input = document.getElementById('search_here')
+    console.log(input)
+
+    let filteredArr = []
+
+    input.addEventListener('keyup', (e)=>{
+        box.innerHTML = ""
+        filteredArr = rdata.filter(info=> info['army_name'].includes(e.target.value))
+        console.log(filteredArr)
+        {#alert(filteredArr)#}
+        if (filteredArr.length > 0){
+            filteredArr.map(info=>{
+                box.innerHTML += `<b>${info['army_name']}</b><br>`
+            })
+        } else {
+            box.innerHTML = "<b>No results found...</b>"
+        }
+    })
+
+</script>
+{% endblock scripts %}
