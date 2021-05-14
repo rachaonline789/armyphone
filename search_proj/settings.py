@@ -133,6 +133,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR,'static')
+# ]
+
 # อันนี้ต้องใส่ ถ้าจะใช้การ Upload และ Show ภาพ MEDIA_ROOT และ MEDIA_URL
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'

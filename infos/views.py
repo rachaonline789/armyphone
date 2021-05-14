@@ -13,4 +13,14 @@ class InfoListView(ListView):
         context = super().get_context_data(**kwargs)
         context["qs_json"] = json.dumps(list(tb_army_phone.objects.values()))
         return context
+
+
+# class InfoListView(ListView):
+#     model = tb_army_phone
+#     template_name = 'infos/mainpage.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["qs_json"] = json.dumps(list(tb_army_phone.objects.values()))
+#         return context
     

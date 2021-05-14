@@ -6,23 +6,36 @@
 
 {% block content %}
     <br><br>
-    <center><h2>ต้องการค้นหาเบอร์ใครเหรอจ๊ะ</h2></center>
+    <center>
+    <img src="https://gorgunshop.com/wp-content/uploads/2021/05/army2logo.png" alt="" width="80%">
+{#    <img src="{% static '/images/army2logo.png' %}" alt="" width="80%">#}
+    </center>
+{#    <center><h2>เบอร์โทรศัพท์ ทภ.2</h2></center>#}
     <br>
-    <input id="search_here" class="form-control mb-3" placeholder="พิมพ์ชื่อที่ต้องการค้นหาที่นี่..."/>
-    <br><br>
+
+    <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-lg">ค้นหา --></span>
+        </div>
+        <input id="search_here" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-sm" placeholder="พิมพ์ชื่อ หรือตำแหน่ง ที่นี่..." >
+    </div>
+
+{#    <input id="search_here" class="form-control mb-3" placeholder="พิมพ์ชื่อที่ต้องการค้นหาที่นี่..."/>#}
+    <br><br><br>
     <div id="box">
         {% for item in object_list %}
             {#            <b>{{ item.army_name }} {{ item.army_rank }} {{ item.army_phone }} {{ item.army_province }}#}
             {#            {{ item.army_nickname }}<b><br>#}
 
             <div class="card">
-                <h4 class="card-header">{{ item.army_name }}</h4>
+                <h4 class="card-header alert-primary">{{ item.army_name }}</h4>
                 <div class="card-body">
                     <h5 class="card-title">ตำแหน่ง : {{ item.army_rank }}</h5>
-                    <p class="card-text">จังหวัด : {{ item.army_province }}</p>
-                    <a href="tel:{{ item.army_phone }}" class="btn btn-success">โทร. {{ item.army_phone }}</a>
+{#                    <p class="card-text">จังหวัด : {{ item.army_province }}</p>#}
+                    <br><a href="tel:{{ item.army_phone }}" class="btn btn-success btn-lg">เบอร์โทร : {{ item.army_phone }}</a>
                 </div>
             </div>
+            <br>
 
         {% endfor %}
     </div>
