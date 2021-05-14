@@ -82,17 +82,28 @@ WSGI_APPLICATION = 'search_proj.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'armyphone',
-        'USER': 'root',
-        'HOST': 'localhost',
-        'PORT': ''
-        # 'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'armyphone',
+            'USER': 'root',
+            'HOST': 'localhost',
+            'PORT': ''
+            # 'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'armyphone',
+            'USER': 'john4455',
+            'PASSWORD': '@Goy4455Lover',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 
 # Password validation
@@ -132,6 +143,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR,'static')
